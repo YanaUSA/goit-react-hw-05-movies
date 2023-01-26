@@ -7,18 +7,26 @@ export const Reviews = () => {
   const { movieId } = useParams();
 
   useEffect(() => {
-    getReviews(Number(movieId)).then(setReviews);
+    getReviews(Number(movieId)).then(response => {
+      const fetchedReviewsData = response.map(({ id, content, author }) => ({
+        id,
+        content,
+        author,
+      }));
+      setReviews(fetchedReviewsData);
+    });
   }, [movieId]);
 
   if (!reviews) {
     return null;
   }
-  console.log('reviews', reviews);
+
   return (
     <div>
+      {!reviews.length && <p>We don't have any reviews for this movie.</p>}
       <ul>
-        {reviews.map(({ content, author }) => (
-          <li>
+        {reviews.map(({ id, content, author }) => (
+          <li key={id}>
             <h3>Author: {author}</h3>
             <p>{content}</p>
           </li>

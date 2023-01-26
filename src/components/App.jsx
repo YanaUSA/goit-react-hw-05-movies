@@ -1,3 +1,4 @@
+import { lazy } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -8,6 +9,8 @@ import { MovieDetails } from '../pages/Movies/MovieDetails/MovieDetails';
 import { Cast } from '../pages/Movies/MovieDetails/Cast/Cast';
 import { Reviews } from '../pages/Movies/MovieDetails/Reviews/Reviews';
 import { ErrorImage } from './ErrorImage/ErrorImage';
+
+// const Home = lazy() => import second from 'first'
 
 export const App = () => {
   return (

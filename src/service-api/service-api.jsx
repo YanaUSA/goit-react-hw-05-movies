@@ -27,8 +27,6 @@ export const getTrendingFilms = async () => {
   }
 };
 
-// getTrendingFilms(76600);
-
 export const getSearchedFilms = async query => {
   const searchParams = new URLSearchParams({
     api_key: 'f473c515ad1de0efd576d9ff7cafa2d6',
@@ -39,6 +37,11 @@ export const getSearchedFilms = async query => {
     const response = await axios.get(
       `${BASE_URL}/search/movie?${searchParams}`
     );
+
+    if (response.data.results.length === 0) {
+      toast.warn('Please enter right query!');
+      return;
+    }
 
     return response.data.results;
   } catch (error) {
@@ -79,8 +82,6 @@ export const getMovieCast = async movieId => {
       `${BASE_URL}/movie/${movieId}/credits?${searchParams}`
     );
 
-    console.log('getMovieCast', response.data.cast);
-
     return response.data.cast;
   } catch (error) {
     toast.error('Something went wrong! An error occurred!', {
@@ -94,8 +95,6 @@ export const getMovieCast = async movieId => {
   }
 };
 
-// getMovieCast(76600);
-
 export const getReviews = async movieId => {
   const searchParams = new URLSearchParams({
     api_key: 'f473c515ad1de0efd576d9ff7cafa2d6',
@@ -105,8 +104,6 @@ export const getReviews = async movieId => {
     const response = await axios.get(
       `${BASE_URL}/movie/${movieId}/reviews?${searchParams}`
     );
-
-    console.log('response.data.reviews', response.data.results);
 
     return response.data.results;
   } catch (error) {
@@ -120,5 +117,3 @@ export const getReviews = async movieId => {
     });
   }
 };
-
-// getReviews(76600);

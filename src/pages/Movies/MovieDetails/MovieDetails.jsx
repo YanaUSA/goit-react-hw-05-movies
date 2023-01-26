@@ -1,10 +1,12 @@
-import { Link, Outlet, useParams } from 'react-router-dom';
+import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { BsArrowLeft } from 'react-icons/bs';
 import { getMovieDetails } from '../../../service-api/service-api';
 
 export const MovieDetails = () => {
   const [movieDetails, setMovieDetails] = useState(null);
   const { movieId } = useParams();
+  const location = useLocation();
 
   useEffect(() => {
     getMovieDetails(Number(movieId)).then(setMovieDetails);
@@ -21,13 +23,22 @@ export const MovieDetails = () => {
     { href: 'reviews', name: 'Reviews' },
   ];
 
+  const backLinkHref = location.state?.from ?? '/movies';
+
   return (
     <main style={{ padding: 20, backgroundColor: 'bisque' }}>
-      {/* <Link to="movies"></Link> */}
+      <Link to={backLinkHref} style={{ border: 2, width: 200 }}>
+        <BsArrowLeft />
+        Go back
+      </Link>
       <div>
-        <img src={poster_path} alt={title} />
+        <img
+          style={{ width: 200 }}
+          src={`https://image.tmdb.org/t/p/original${poster_path}`}
+          alt={title}
+        />
         <h2>{title}</h2>
-        <p>User score: {vote_average}</p>
+        <p>User score: {Math.round(vote_average * 10)}%</p>
         <h3>Overview</h3>
         <p>{overview}</p>
         <h3>Genres</h3>
@@ -42,7 +53,9 @@ export const MovieDetails = () => {
         <ul>
           {linkItem.map(({ href, name }) => (
             <li key={href} style={{ padding: 10 }}>
-              <Link to={href}>{name}</Link>
+              <Link to={href} state={{ from: backLinkHref }}>
+                {name}
+              </Link>
             </li>
           ))}
         </ul>

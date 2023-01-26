@@ -15,7 +15,6 @@ export const SearchForm = ({ onChange }) => {
       toast.warn('Please enter search query!');
       return;
     }
-
     onChange(inputValue);
     // setInputValue('');
   };
