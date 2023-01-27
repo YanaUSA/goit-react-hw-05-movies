@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getMovieCast } from '../../../../service-api/service-api';
-import { NoImageSkeleton } from '../../../../components/NoImageSkeleton/NoImageSkeleton';
+// import { NoImageSkeleton } from '../../../../components/NoImageSkeleton/NoImageSkeleton';
 
 const Cast = () => {
   const [cast, setCast] = useState([]);
