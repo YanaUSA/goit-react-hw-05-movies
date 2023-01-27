@@ -2,9 +2,9 @@ import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams, Link, Outlet, useLocation } from 'react-router-dom';
 import { SearchForm } from '../../components/SearchForm/SearchForm';
 import { getSearchedFilms } from '../../service-api/service-api';
-import { Spinner } from '../../components/Loader/Loader';
+import Spinner from '../../components/Loader/Loader';
 
-export const Movies = () => {
+const Movies = () => {
   const [searchedFilms, setSearchedFilms] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
@@ -45,3 +45,5 @@ export const Movies = () => {
     </main>
   );
 };
+
+export default Movies;

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getMovieCast } from '../../../../service-api/service-api';
-// import { NoImageSkeleton } from '../../../../components/NoImageSkeleton/NoImageSkeleton';
+import noImage from '../../../../components/Images/no-img.jpg';
 
 const Cast = () => {
   const [cast, setCast] = useState([]);
@@ -17,6 +17,7 @@ const Cast = () => {
           character,
         })
       );
+
       setCast(fetchedCastData);
     });
   }, [movieId]);
@@ -29,15 +30,19 @@ const Cast = () => {
       <ul>
         {cast.map(({ id, profile_path, name, character }) => (
           <li key={id}>
-            {/* {!profile_path ? (
-              <NoImageSkeleton />
-            ) : ( */}
-            <img
-              style={{ width: 50 }}
-              src={`https://image.tmdb.org/t/p/original${profile_path}`}
-              alt={name}
-            />
-            {/* )} */}
+            {!profile_path ? (
+              <img
+                style={{ width: 50 }}
+                src={noImage}
+                alt={`${'No image available'}`}
+              />
+            ) : (
+              <img
+                style={{ width: 50 }}
+                src={`https://image.tmdb.org/t/p/original${profile_path}`}
+                alt={name}
+              />
+            )}
 
             <h4>{name}</h4>
             <p>Character: {character}</p>

@@ -2,9 +2,9 @@ import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import { useState, useEffect, Suspense } from 'react';
 import { BsArrowLeft } from 'react-icons/bs';
 import { getMovieDetails } from '../../../service-api/service-api';
-import { Spinner } from '../../../components/Loader/Loader';
+import Spinner from '../../../components/Loader/Loader';
 
-export const MovieDetails = () => {
+const MovieDetails = () => {
   const [movieDetails, setMovieDetails] = useState(null);
   const { movieId } = useParams();
   const location = useLocation();
@@ -67,3 +67,5 @@ export const MovieDetails = () => {
     </main>
   );
 };
+
+export default MovieDetails;

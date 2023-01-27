@@ -1,5 +1,5 @@
-// import { Outlet } from 'react-router-dom';
 import { Header } from '../Header/Header';
+import PropTypes from 'prop-types';
 
 export const Layout = ({ children }) => {
   return (
@@ -8,4 +8,8 @@ export const Layout = ({ children }) => {
       <main>{children}</main>
     </div>
   );
+};
+
+Layout.propTypes = {
+  children: PropTypes.node,
 };

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { toast } from 'react-toastify';
+import PropTypes from 'prop-types';
 
 export const SearchForm = ({ onChange }) => {
   const [inputValue, setInputValue] = useState('');
@@ -36,4 +37,8 @@ export const SearchForm = ({ onChange }) => {
       </form>
     </main>
   );
+};
+
+SearchForm.propTypes = {
+  onChange: PropTypes.func.isRequired,
 };

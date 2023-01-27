@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { getTrendingFilms } from '../../service-api/service-api';
 
-export const Home = () => {
+const Home = () => {
   const [filmData, setFilmData] = useState([]);
   const location = useLocation();
 
@@ -32,3 +32,5 @@ export const Home = () => {
     </main>
   );
 };
+
+export default Home;
