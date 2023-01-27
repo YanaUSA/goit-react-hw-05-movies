@@ -1,7 +1,8 @@
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { BsArrowLeft } from 'react-icons/bs';
 import { getMovieDetails } from '../../../service-api/service-api';
+import { Spinner } from '../../../components/Loader/Loader';
 
 export const MovieDetails = () => {
   const [movieDetails, setMovieDetails] = useState(null);
@@ -60,7 +61,9 @@ export const MovieDetails = () => {
           ))}
         </ul>
       </div>
-      <Outlet />
+      <Suspense fallback={<Spinner />}>
+        <Outlet />
+      </Suspense>
     </main>
   );
 };

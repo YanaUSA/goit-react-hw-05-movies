@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams, Link, Outlet, useLocation } from 'react-router-dom';
-import { SearchForm } from '../Movies/SearchForm/SearchForm';
+import { SearchForm } from '../../components/SearchForm/SearchForm';
 import { getSearchedFilms } from '../../service-api/service-api';
+import { Spinner } from '../../components/Loader/Loader';
 
 export const Movies = () => {
   const [searchedFilms, setSearchedFilms] = useState([]);
@@ -38,7 +39,9 @@ export const Movies = () => {
           </li>
         ))}
       </ul>
-      <Outlet />
+      <Suspense fallback={<Spinner />}>
+        <Outlet />
+      </Suspense>
     </main>
   );
 };
