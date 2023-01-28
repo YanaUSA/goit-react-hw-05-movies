@@ -34,15 +34,18 @@ const Reviews = () => {
 
   return (
     <ReviewBox>
-      {!reviews.length && <p>We don't have any reviews for this movie.</p>}
-      <ReviewList>
-        {reviews.map(({ id, content, author }) => (
-          <ReviewItem key={id}>
-            <ReviewAuthor>Author: {author}</ReviewAuthor>
-            <ReviewText>{content}</ReviewText>
-          </ReviewItem>
-        ))}
-      </ReviewList>
+      {!reviews.length ? (
+        <p>We don't have any reviews for this movie.</p>
+      ) : (
+        <ReviewList>
+          {reviews.map(({ id, content, author }) => (
+            <ReviewItem key={id}>
+              <ReviewAuthor>Author: {author}</ReviewAuthor>
+              <ReviewText>{content}</ReviewText>
+            </ReviewItem>
+          ))}
+        </ReviewList>
+      )}
     </ReviewBox>
   );
 };
