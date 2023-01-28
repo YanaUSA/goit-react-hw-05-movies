@@ -6,6 +6,8 @@ import Theme from '../components/Theme/Theme';
 import { Layout } from './Layout/Layout';
 import Spinner from '../components/Loader/Loader';
 
+// import { CameraLoader } from '../components/Loader/Load';
+
 const Home = lazy(() => import('../pages/Home/Home'));
 const Movies = lazy(() => import('../pages/Movies/Movies'));
 const Cast = lazy(() => import('../pages/Movies/MovieDetails/Cast/Cast'));

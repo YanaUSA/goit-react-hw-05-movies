@@ -1,4 +1,5 @@
-import { NavLink } from 'react-router-dom';
+import { NavLinkStyle } from './Header.styled';
+import { HeaderBox } from './Header.styled';
 
 const navItems = [
   { href: '', text: 'Home' },
@@ -7,12 +8,12 @@ const navItems = [
 
 export const Header = () => {
   return (
-    <header style={{ padding: 20, backgroundColor: 'azure' }}>
+    <HeaderBox>
       {navItems.map(({ href, text }) => (
-        <NavLink style={{ margin: 10, padding: 10 }} to={href} key={href}>
+        <NavLinkStyle to={href} key={href}>
           {text}
-        </NavLink>
+        </NavLinkStyle>
       ))}
-    </header>
+    </HeaderBox>
   );
 };

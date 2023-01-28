@@ -1,6 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getReviews } from '../../../../service-api/service-api';
+import {
+  ReviewBox,
+  ReviewList,
+  ReviewItem,
+  ReviewText,
+  ReviewAuthor,
+} from './Reviews.styled';
 
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
@@ -8,6 +15,10 @@ const Reviews = () => {
 
   useEffect(() => {
     getReviews(Number(movieId)).then(response => {
+      if (!response) {
+        return;
+      }
+
       const fetchedReviewsData = response.map(({ id, content, author }) => ({
         id,
         content,
@@ -22,17 +33,17 @@ const Reviews = () => {
   }
 
   return (
-    <div>
+    <ReviewBox>
       {!reviews.length && <p>We don't have any reviews for this movie.</p>}
-      <ul>
+      <ReviewList>
         {reviews.map(({ id, content, author }) => (
-          <li key={id}>
-            <h3>Author: {author}</h3>
-            <p>{content}</p>
-          </li>
+          <ReviewItem key={id}>
+            <ReviewAuthor>Author: {author}</ReviewAuthor>
+            <ReviewText>{content}</ReviewText>
+          </ReviewItem>
         ))}
-      </ul>
-    </div>
+      </ReviewList>
+    </ReviewBox>
   );
 };
 

@@ -7,6 +7,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: azure;
+  color: #212121;
 }
 
 code {
@@ -39,17 +41,23 @@ ul {
 }
 
 a {
-  text-decoration: none;
+  /* text-decoration: none; */
+  color: #212121;
+}
+
+a:hover {
+  color: #56c8ea;
 }
 
 h1,
 h2,
 h3,
+h4,
+h5,
 p {
   margin: 0;
 }
 
-.a {
-  color: #000;
-  background: azure;
+main {
+  background: 'azure';
 }

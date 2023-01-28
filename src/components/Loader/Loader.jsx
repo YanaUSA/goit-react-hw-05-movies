@@ -8,7 +8,7 @@ const Spinner = () => {
         height="80"
         width="80"
         radius="9"
-        color="#d87093"
+        color="##56c8ea"
         ariaLabel="three-dots-loading"
         visible={true}
       />

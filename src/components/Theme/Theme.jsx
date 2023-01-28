@@ -34,6 +34,10 @@ const theme = {
     tab: '768px',
     pc: '1200px',
   },
+
+  main: {
+    background: 'azure',
+  },
 };
 
 const Theme = ({ children }) => (

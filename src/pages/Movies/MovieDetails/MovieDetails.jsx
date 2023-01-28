@@ -1,6 +1,20 @@
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import { useState, useEffect, Suspense } from 'react';
 import { BsArrowLeft } from 'react-icons/bs';
+import {
+  MovieDetailsContainer,
+  GoBackLink,
+  GoBackBox,
+  MovieContentBox,
+  MovieBox,
+  MovieImage,
+  MovieTitle,
+  MovieDetailsTitle,
+  GenresList,
+  MovieDetailsText,
+  AddInfoBox,
+  AddInfoContext,
+} from './MovieDetails.styled';
 import { getMovieDetails } from '../../../service-api/service-api';
 import Spinner from '../../../components/Loader/Loader';
 
@@ -27,43 +41,55 @@ const MovieDetails = () => {
   const backLinkHref = location.state?.from ?? '/movies';
 
   return (
-    <main style={{ padding: 20, backgroundColor: 'bisque' }}>
-      <Link to={backLinkHref} style={{ border: 2, width: 200 }}>
-        <BsArrowLeft />
-        Go back
-      </Link>
-      <div>
-        <img
-          style={{ width: 200 }}
-          src={`https://image.tmdb.org/t/p/original${poster_path}`}
-          alt={title}
-        />
-        <h2>{title}</h2>
-        <p>User score: {Math.round(vote_average * 10)}%</p>
-        <h3>Overview</h3>
-        <p>{overview}</p>
-        <h3>Genres</h3>
-        <ul>
-          {genres.map(({ id, name }) => (
-            <li key={id}>{name}</li>
-          ))}
-        </ul>
-      </div>
-      <div>
-        Additional information:
-        <ul>
-          {linkItem.map(({ href, name }) => (
-            <li key={href} style={{ padding: 10 }}>
-              <Link to={href} state={{ from: backLinkHref }}>
-                {name}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <Suspense fallback={<Spinner />}>
-        <Outlet />
-      </Suspense>
+    <main>
+      {' '}
+      <GoBackBox>
+        <GoBackLink to={backLinkHref}>
+          <BsArrowLeft style={{ marginRight: 4 }} />
+          Go back
+        </GoBackLink>
+      </GoBackBox>
+      <MovieDetailsContainer>
+        <MovieBox>
+          <MovieImage
+            src={`https://image.tmdb.org/t/p/original${poster_path}`}
+            alt={title}
+          />
+          <MovieContentBox>
+            <MovieTitle>{title}</MovieTitle>
+            <MovieDetailsText>
+              User score: {Math.round(vote_average * 10)}%
+            </MovieDetailsText>
+            <MovieDetailsTitle>Overview</MovieDetailsTitle>
+            <MovieDetailsText>{overview}</MovieDetailsText>
+            <MovieDetailsTitle>Genres</MovieDetailsTitle>
+            <GenresList>
+              {genres.map(({ id, name }) => (
+                <li key={id} style={{ paddingRight: 14 }}>
+                  {name}
+                </li>
+              ))}
+            </GenresList>
+          </MovieContentBox>
+        </MovieBox>
+        <AddInfoBox>
+          <AddInfoContext>
+            <MovieDetailsText>Additional information:</MovieDetailsText>
+            <ul>
+              {linkItem.map(({ href, name }) => (
+                <li key={href} style={{ padding: 10 }}>
+                  <Link to={href} state={{ from: backLinkHref }}>
+                    {name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </AddInfoContext>
+        </AddInfoBox>
+        <Suspense fallback={<Spinner />}>
+          <Outlet />
+        </Suspense>
+      </MovieDetailsContainer>
     </main>
   );
 };

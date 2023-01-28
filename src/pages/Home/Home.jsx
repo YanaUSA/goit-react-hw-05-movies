@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { getTrendingFilms } from '../../service-api/service-api';
+import { MainTitle, FilmList } from './Home.styled';
 
 const Home = () => {
   const [filmData, setFilmData] = useState([]);
@@ -8,6 +9,10 @@ const Home = () => {
 
   useEffect(() => {
     getTrendingFilms().then(response => {
+      if (!response) {
+        return;
+      }
+
       const fetchedFilmData = response.map(({ id, title }) => ({
         id,
         title,
@@ -17,9 +22,9 @@ const Home = () => {
   }, []);
 
   return (
-    <main style={{ padding: 20, backgroundColor: 'bisque' }}>
-      <h1>Trending today</h1>
-      <ul>
+    <main>
+      <MainTitle>Trending today</MainTitle>
+      <FilmList>
         {filmData.length > 0 &&
           filmData.map(({ id, title }) => (
             <li key={id}>
@@ -28,7 +33,7 @@ const Home = () => {
               </Link>
             </li>
           ))}
-      </ul>
+      </FilmList>
     </main>
   );
 };

@@ -1,5 +1,6 @@
 import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams, Link, Outlet, useLocation } from 'react-router-dom';
+import { FilmList } from './Movies.styled';
 import { SearchForm } from '../../components/SearchForm/SearchForm';
 import { getSearchedFilms } from '../../service-api/service-api';
 import Spinner from '../../components/Loader/Loader';
@@ -28,9 +29,9 @@ const Movies = () => {
   };
 
   return (
-    <main style={{ padding: 20, backgroundColor: 'palevioletred' }}>
+    <main>
       <SearchForm onChange={onSearchSubmit} />
-      <ul>
+      <FilmList>
         {searchedFilms.map(({ id, title }) => (
           <li key={id}>
             <Link to={`${id}`} state={{ from: location }}>
@@ -38,7 +39,7 @@ const Movies = () => {
             </Link>
           </li>
         ))}
-      </ul>
+      </FilmList>
       <Suspense fallback={<Spinner />}>
         <Outlet />
       </Suspense>

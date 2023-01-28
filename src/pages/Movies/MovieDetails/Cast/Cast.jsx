@@ -2,6 +2,14 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getMovieCast } from '../../../../service-api/service-api';
 import noImage from '../../../../components/Images/no-img.jpg';
+import {
+  CastBox,
+  CastList,
+  CastItem,
+  CastImage,
+  CastName,
+  CastCharacter,
+} from './Cast.styled';
 
 const Cast = () => {
   const [cast, setCast] = useState([]);
@@ -9,6 +17,10 @@ const Cast = () => {
 
   useEffect(() => {
     getMovieCast(Number(movieId)).then(response => {
+      if (!response) {
+        return;
+      }
+
       const fetchedCastData = response.map(
         ({ id, profile_path, name, character }) => ({
           id,
@@ -26,30 +38,25 @@ const Cast = () => {
   }
 
   return (
-    <div>
-      <ul>
+    <CastBox>
+      <CastList>
         {cast.map(({ id, profile_path, name, character }) => (
-          <li key={id}>
+          <CastItem key={id}>
             {!profile_path ? (
-              <img
-                style={{ width: 50 }}
-                src={noImage}
-                alt={`${'No image available'}`}
-              />
+              <CastImage src={noImage} alt={`${'No image available'}`} />
             ) : (
-              <img
-                style={{ width: 50 }}
+              <CastImage
                 src={`https://image.tmdb.org/t/p/original${profile_path}`}
                 alt={name}
               />
             )}
 
-            <h4>{name}</h4>
-            <p>Character: {character}</p>
-          </li>
+            <CastName>{name}</CastName>
+            <CastCharacter>Character: {character}</CastCharacter>
+          </CastItem>
         ))}
-      </ul>
-    </div>
+      </CastList>
+    </CastBox>
   );
 };
 
