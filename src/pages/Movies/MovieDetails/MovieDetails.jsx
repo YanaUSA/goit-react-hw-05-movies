@@ -1,6 +1,7 @@
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import { useState, useEffect, Suspense } from 'react';
 import { BsArrowLeft } from 'react-icons/bs';
+import noImage from '../../../components/Images/no-img.jpg';
 import {
   MovieDetailsContainer,
   GoBackLink,
@@ -51,10 +52,14 @@ const MovieDetails = () => {
       </GoBackBox>
       <MovieDetailsContainer>
         <MovieBox>
-          <MovieImage
-            src={`https://image.tmdb.org/t/p/original${poster_path}`}
-            alt={title}
-          />
+          {!poster_path ? (
+            <MovieImage src={noImage} alt={`${'No image available'}`} />
+          ) : (
+            <MovieImage
+              src={`https://image.tmdb.org/t/p/original${poster_path}`}
+              alt={title}
+            />
+          )}
           <MovieContentBox>
             <MovieTitle>{title}</MovieTitle>
             <MovieDetailsText>

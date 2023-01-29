@@ -7,6 +7,7 @@ import {
   ReviewItem,
   ReviewText,
   ReviewAuthor,
+  NoReviewText,
 } from './Reviews.styled';
 
 const Reviews = () => {
@@ -35,7 +36,7 @@ const Reviews = () => {
   return (
     <ReviewBox>
       {!reviews.length ? (
-        <p>We don't have any reviews for this movie.</p>
+        <NoReviewText>We don't have any reviews for this movie.</NoReviewText>
       ) : (
         <ReviewList>
           {reviews.map(({ id, content, author }) => (

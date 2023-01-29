@@ -25,3 +25,7 @@ export const ReviewAuthor = styled.h3`
 export const ReviewText = styled.p`
   padding: 10px 0 10px 0;
 `;
+
+export const NoReviewText = styled.p`
+  padding: 10px 0 10px 20px;
+`;

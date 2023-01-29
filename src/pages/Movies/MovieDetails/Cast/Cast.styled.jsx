@@ -33,3 +33,7 @@ export const CastCharacter = styled.p`
   font-weight: 400;
   padding-top: 10px;
 `;
+
+export const NoCastText = styled.p`
+  padding: 10px 0 10px 20px;
+`;

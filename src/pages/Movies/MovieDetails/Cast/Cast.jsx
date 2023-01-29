@@ -9,6 +9,7 @@ import {
   CastImage,
   CastName,
   CastCharacter,
+  NoCastText,
 } from './Cast.styled';
 
 const Cast = () => {
@@ -39,23 +40,27 @@ const Cast = () => {
 
   return (
     <CastBox>
-      <CastList>
-        {cast.map(({ id, profile_path, name, character }) => (
-          <CastItem key={id}>
-            {!profile_path ? (
-              <CastImage src={noImage} alt={`${'No image available'}`} />
-            ) : (
-              <CastImage
-                src={`https://image.tmdb.org/t/p/original${profile_path}`}
-                alt={name}
-              />
-            )}
+      {!cast.length ? (
+        <NoCastText>We don't have any casts for this movie.</NoCastText>
+      ) : (
+        <CastList>
+          {cast.map(({ id, profile_path, name, character }) => (
+            <CastItem key={id}>
+              {!profile_path ? (
+                <CastImage src={noImage} alt={`${'No image available'}`} />
+              ) : (
+                <CastImage
+                  src={`https://image.tmdb.org/t/p/original${profile_path}`}
+                  alt={name}
+                />
+              )}
 
-            <CastName>{name}</CastName>
-            <CastCharacter>Character: {character}</CastCharacter>
-          </CastItem>
-        ))}
-      </CastList>
+              <CastName>{name}</CastName>
+              <CastCharacter>Character: {character}</CastCharacter>
+            </CastItem>
+          ))}
+        </CastList>
+      )}
     </CastBox>
   );
 };
